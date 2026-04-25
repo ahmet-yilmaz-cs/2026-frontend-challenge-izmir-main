@@ -3,6 +3,7 @@ import type { Filters } from './useFilters'
 import { isSamePerson } from '@/utils/normalizeName'
 import { isSameLocation } from '@/utils/normalizeLocation'
 import { matchesDateAndTime } from '@/utils/parseTimestamp'
+import { foldText } from '@/utils/foldText'
 
 function seenWithIncludes(seenWith: string, target: string): boolean {
   if (!seenWith) return false
@@ -14,9 +15,9 @@ function seenWithIncludes(seenWith: string, target: string): boolean {
 
 function matchesQuery(q: string | undefined, ...fields: string[]): boolean {
   if (!q) return true
-  const needle = q.trim().toLowerCase()
+  const needle = foldText(q.trim())
   if (!needle) return true
-  return fields.some((f) => f && f.toLowerCase().includes(needle))
+  return fields.some((f) => f && foldText(f).includes(needle))
 }
 
 function matchesLocation(rowLocation: string, target: string | undefined): boolean {
