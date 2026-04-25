@@ -6,6 +6,14 @@ type PageMeta = {
 }
 
 const PAGE_META: Record<string, PageMeta> = {
+  '/iz': {
+    title: "Podo'nun İzi",
+    subtitle: 'Tüm Podo olayları kronolojik sırayla',
+  },
+  '/harita': {
+    title: 'Vaka Haritası',
+    subtitle: 'Tüm konum verileri tek ekranda',
+  },
   '/checkins': {
     title: 'Giriş Kayıtları',
     subtitle: 'Konum bildirimleri ve zaman damgaları',

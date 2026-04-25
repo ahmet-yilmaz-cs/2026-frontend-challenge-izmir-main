@@ -18,9 +18,6 @@ npm install
 
 ```bash
 npm run dev      # geliştirme sunucusu
-npm run build    # üretim derlemesi
-npm run preview  # derlemeyi yerel önizle
-npm run lint     # lint
 ```
 
 Geliştirme sunucusu varsayılan olarak `http://localhost:5173` adresinde çalışır.

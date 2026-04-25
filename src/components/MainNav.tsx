@@ -5,6 +5,8 @@ import {
   Eye,
   StickyNote,
   AlertTriangle,
+  Footprints,
+  Map,
   type LucideIcon,
 } from 'lucide-react'
 import { useCheckins } from '@/hooks/useCheckins'
@@ -18,6 +20,12 @@ type NavItem = {
   label: string
   icon: LucideIcon
   count?: number
+  accent?: boolean
+}
+
+type NavGroup = {
+  title: string
+  items: NavItem[]
 }
 
 const PRESERVED_KEYS = [
@@ -50,58 +58,81 @@ export function MainNav() {
   const location = useLocation()
   const search = preserveSearch(location.search)
 
-  const items: NavItem[] = [
-    { to: '/checkins', label: 'Giriş Kayıtları', icon: MapPin, count: checkins?.length },
-    { to: '/messages', label: 'Mesajlar', icon: MessageSquare, count: messages?.length },
-    { to: '/sightings', label: 'Görülmeler', icon: Eye, count: sightings?.length },
-    { to: '/notes', label: 'Kişisel Notlar', icon: StickyNote, count: notes?.length },
-    { to: '/tips', label: 'Anonim İhbarlar', icon: AlertTriangle, count: tips?.length },
+  const groups: NavGroup[] = [
+    {
+      title: 'Soruşturma',
+      items: [
+        { to: '/iz', label: "Podo'nun İzi", icon: Footprints, accent: true },
+        { to: '/harita', label: 'Vaka Haritası', icon: Map, accent: true },
+      ],
+    },
+    {
+      title: 'Ham veri',
+      items: [
+        { to: '/checkins', label: 'Giriş Kayıtları', icon: MapPin, count: checkins?.length },
+        { to: '/messages', label: 'Mesajlar', icon: MessageSquare, count: messages?.length },
+        { to: '/sightings', label: 'Görülmeler', icon: Eye, count: sightings?.length },
+        { to: '/notes', label: 'Kişisel Notlar', icon: StickyNote, count: notes?.length },
+        { to: '/tips', label: 'Anonim İhbarlar', icon: AlertTriangle, count: tips?.length },
+      ],
+    },
   ]
 
   return (
-    <nav>
-      <ul className="flex flex-col gap-2">
-        {items.map(({ to, label, icon: Icon, count }) => (
-          <li key={to}>
-            <NavLink
-              to={{ pathname: to, search }}
-              end
-              className={({ isActive }) =>
-                `flex items-center gap-3 px-6 py-3 rounded-md text-base font-medium transition-all group ${
-                  isActive
-                    ? 'bg-gray-50 text-gray-800'
-                    : 'text-gray-600 hover:bg-gray-50 hover:text-gray-800'
-                }`
-              }
-            >
-              {({ isActive }) => (
-                <>
-                  <Icon
-                    size={22}
-                    className={`transition-colors ${
+    <nav className="flex flex-col gap-6">
+      {groups.map((group) => (
+        <div key={group.title} className="flex flex-col gap-2">
+          <h3 className="px-6 text-[11px] font-semibold uppercase tracking-wider text-gray-400">
+            {group.title}
+          </h3>
+          <ul className="flex flex-col gap-1">
+            {group.items.map(({ to, label, icon: Icon, count, accent }) => (
+              <li key={to}>
+                <NavLink
+                  to={{ pathname: to, search }}
+                  end
+                  className={({ isActive }) =>
+                    `flex items-center gap-3 px-6 py-2.5 rounded-md text-base font-medium transition-all group ${
                       isActive
-                        ? 'text-indigo-600'
-                        : 'text-gray-400 group-hover:text-indigo-600'
-                    }`}
-                  />
-                  <span className="flex-1">{label}</span>
-                  {count !== undefined && (
-                    <span
-                      className={`text-xs tabular-nums px-2 py-0.5 rounded-full transition-colors ${
-                        isActive
-                          ? 'bg-indigo-100 text-indigo-700'
-                          : 'bg-gray-100 text-gray-500'
-                      }`}
-                    >
-                      {count}
-                    </span>
+                        ? 'bg-gray-50 text-gray-800'
+                        : 'text-gray-600 hover:bg-gray-50 hover:text-gray-800'
+                    }`
+                  }
+                >
+                  {({ isActive }) => (
+                    <>
+                      <Icon
+                        size={20}
+                        className={`transition-colors ${
+                          isActive
+                            ? accent
+                              ? 'text-amber-600'
+                              : 'text-indigo-600'
+                            : accent
+                              ? 'text-amber-500 group-hover:text-amber-600'
+                              : 'text-gray-400 group-hover:text-indigo-600'
+                        }`}
+                      />
+                      <span className="flex-1">{label}</span>
+                      {count !== undefined && (
+                        <span
+                          className={`text-xs tabular-nums px-2 py-0.5 rounded-full transition-colors ${
+                            isActive
+                              ? 'bg-indigo-100 text-indigo-700'
+                              : 'bg-gray-100 text-gray-500'
+                          }`}
+                        >
+                          {count}
+                        </span>
+                      )}
+                    </>
                   )}
-                </>
-              )}
-            </NavLink>
-          </li>
-        ))}
-      </ul>
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
     </nav>
   )
 }
