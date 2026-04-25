@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import {
   MapPin,
   MessageSquare,
@@ -20,12 +20,35 @@ type NavItem = {
   count?: number
 }
 
+const PRESERVED_KEYS = [
+  'person',
+  'q',
+  'date',
+  'timeFrom',
+  'timeTo',
+  'location',
+  'confidence',
+] as const
+
+function preserveSearch(currentSearch: string): string {
+  const src = new URLSearchParams(currentSearch)
+  const next = new URLSearchParams()
+  for (const key of PRESERVED_KEYS) {
+    const v = src.get(key)
+    if (v) next.set(key, v)
+  }
+  const qs = next.toString()
+  return qs ? `?${qs}` : ''
+}
+
 export function MainNav() {
   const { data: checkins } = useCheckins()
   const { data: messages } = useMessages()
   const { data: sightings } = useSightings()
   const { data: notes } = usePersonalNotes()
   const { data: tips } = useAnonymousTips()
+  const location = useLocation()
+  const search = preserveSearch(location.search)
 
   const items: NavItem[] = [
     { to: '/checkins', label: 'Check-ins', icon: MapPin, count: checkins?.length },
@@ -41,7 +64,8 @@ export function MainNav() {
         {items.map(({ to, label, icon: Icon, count }) => (
           <li key={to}>
             <NavLink
-              to={to}
+              to={{ pathname: to, search }}
+              end
               className={({ isActive }) =>
                 `flex items-center gap-3 px-6 py-3 rounded-md text-base font-medium transition-all group ${
                   isActive

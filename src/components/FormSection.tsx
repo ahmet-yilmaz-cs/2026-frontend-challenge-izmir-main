@@ -4,6 +4,7 @@ type SectionState = {
   isLoading: boolean
   isError: boolean
   count?: number
+  total?: number
 }
 
 export function FormSection({
@@ -15,7 +16,11 @@ export function FormSection({
   state: SectionState
   children: ReactNode
 }) {
-  const showHeader = title !== undefined || state.count !== undefined
+  const { count, total } = state
+  const isFiltered =
+    typeof count === 'number' && typeof total === 'number' && count !== total
+
+  const showHeader = title !== undefined || count !== undefined
 
   return (
     <section>
@@ -26,9 +31,15 @@ export function FormSection({
           ) : (
             <span />
           )}
-          {state.count !== undefined && (
-            <span className="text-xs font-medium text-gray-600 bg-gray-100 px-2.5 py-1 rounded-full">
-              {state.count} kayıt
+          {count !== undefined && (
+            <span
+              className={`text-xs font-medium px-2.5 py-1 rounded-full tabular-nums ${
+                isFiltered
+                  ? 'text-indigo-700 bg-indigo-50 border border-indigo-100'
+                  : 'text-gray-600 bg-gray-100'
+              }`}
+            >
+              {isFiltered ? `${count} / ${total} kayıt` : `${count} kayıt`}
             </span>
           )}
         </header>

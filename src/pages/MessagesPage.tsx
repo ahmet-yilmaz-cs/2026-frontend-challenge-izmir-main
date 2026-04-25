@@ -1,29 +1,59 @@
 import { useMessages } from '@/hooks/useMessages'
 import { FormSection, Th, Td } from '@/components/FormSection'
+import { PageContent } from '@/components/PageContent'
+import { EmptyRow } from '@/components/EmptyRow'
+import { FilterBar } from '@/components/filters/FilterBar'
+import { PersonFilter } from '@/components/filters/PersonFilter'
+import { DateRangeFilter } from '@/components/filters/DateRangeFilter'
+import { SearchFilter } from '@/components/filters/SearchFilter'
+import { useFilters } from '@/filters/useFilters'
+import { applyMessageFilters } from '@/filters/applyFilters'
+import { formatDateTime } from '@/utils/parseTimestamp'
 
 export default function MessagesPage() {
   const { data, isLoading, isError } = useMessages()
+  const { filters } = useFilters()
+
+  const rows = data ? applyMessageFilters(data, filters) : undefined
 
   return (
-    <FormSection state={{ isLoading, isError, count: data?.length }}>
-      <thead>
-        <tr>
-          <Th>From</Th>
-          <Th>To</Th>
-          <Th>Message</Th>
-          <Th>Timestamp</Th>
-        </tr>
-      </thead>
-      <tbody>
-        {data?.map((m) => (
-          <tr key={m.id}>
-            <Td>{m.from}</Td>
-            <Td>{m.to}</Td>
-            <Td>{m.message}</Td>
-            <Td mono>{m.timestamp}</Td>
-          </tr>
-        ))}
-      </tbody>
-    </FormSection>
+    <>
+      <FilterBar>
+        <PersonFilter />
+        <DateRangeFilter />
+        <SearchFilter />
+      </FilterBar>
+
+      <PageContent>
+        <FormSection
+          state={{
+            isLoading,
+            isError,
+            count: rows?.length,
+            total: data?.length,
+          }}
+        >
+          <thead>
+            <tr>
+              <Th>From</Th>
+              <Th>To</Th>
+              <Th>Message</Th>
+              <Th>Timestamp</Th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows?.length === 0 && <EmptyRow colSpan={4} />}
+            {rows?.map((m) => (
+              <tr key={m.id}>
+                <Td>{m.from}</Td>
+                <Td>{m.to}</Td>
+                <Td>{m.message}</Td>
+                <Td mono>{formatDateTime(m.timestamp)}</Td>
+              </tr>
+            ))}
+          </tbody>
+        </FormSection>
+      </PageContent>
+    </>
   )
 }

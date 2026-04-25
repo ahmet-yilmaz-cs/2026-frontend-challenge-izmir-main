@@ -13,10 +13,8 @@ export function AppShell() {
     >
       <Sidebar />
       <Header />
-      <main className="overflow-y-auto px-12 py-10">
-        <div className="max-w-6xl mx-auto flex flex-col gap-8">
-          <Outlet />
-        </div>
+      <main className="overflow-y-auto">
+        <Outlet />
       </main>
     </div>
   )
