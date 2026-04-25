@@ -1,6 +1,7 @@
 import type { Checkin, Message, Sighting, PersonalNote, AnonymousTip } from '@/types'
 import type { Filters } from './useFilters'
 import { isSamePerson } from '@/utils/normalizeName'
+import { isSameLocation } from '@/utils/normalizeLocation'
 import { matchesDateAndTime } from '@/utils/parseTimestamp'
 
 function seenWithIncludes(seenWith: string, target: string): boolean {
@@ -20,7 +21,7 @@ function matchesQuery(q: string | undefined, ...fields: string[]): boolean {
 
 function matchesLocation(rowLocation: string, target: string | undefined): boolean {
   if (!target) return true
-  return rowLocation === target
+  return isSameLocation(rowLocation, target)
 }
 
 function matchesConfidence(

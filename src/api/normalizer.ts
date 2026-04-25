@@ -1,5 +1,6 @@
 import type { Checkin, Message, Sighting, PersonalNote, AnonymousTip } from '@/types'
 import { normalizeName, normalizeNameList } from '@/utils/normalizeName'
+import { normalizeLocation } from '@/utils/normalizeLocation'
 
 type RawAnswer = {
   name: string
@@ -21,7 +22,7 @@ export function normalizeCheckin(sub: RawSubmission): Checkin {
   return {
     id: sub.id,
     fullName: normalizeName(getAnswer(sub.answers, 'fullname')),
-    location: getAnswer(sub.answers, 'location'),
+    location: normalizeLocation(getAnswer(sub.answers, 'location')),
     coordinates: getAnswer(sub.answers, 'coordinates'),
     timestamp: getAnswer(sub.answers, 'timestamp'),
     note: getAnswer(sub.answers, 'note'),
@@ -43,7 +44,7 @@ export function normalizeSighting(sub: RawSubmission): Sighting {
     id: sub.id,
     personName: normalizeName(getAnswer(sub.answers, 'personname')),
     seenWith: normalizeNameList(getAnswer(sub.answers, 'seenwith')),
-    location: getAnswer(sub.answers, 'location'),
+    location: normalizeLocation(getAnswer(sub.answers, 'location')),
     coordinates: getAnswer(sub.answers, 'coordinates'),
     timestamp: getAnswer(sub.answers, 'timestamp'),
     note: getAnswer(sub.answers, 'note'),
@@ -63,7 +64,7 @@ export function normalizeAnonymousTip(sub: RawSubmission): AnonymousTip {
   return {
     id: sub.id,
     suspectName: normalizeName(getAnswer(sub.answers, 'suspectname')),
-    location: getAnswer(sub.answers, 'location'),
+    location: normalizeLocation(getAnswer(sub.answers, 'location')),
     coordinates: getAnswer(sub.answers, 'coordinates'),
     timestamp: getAnswer(sub.answers, 'timestamp'),
     tip: getAnswer(sub.answers, 'tip'),
