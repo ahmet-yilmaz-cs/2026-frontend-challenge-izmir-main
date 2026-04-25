@@ -11,12 +11,28 @@ import type { Checkin, Message, Sighting, PersonalNote, AnonymousTip } from '@/t
 const BASE = import.meta.env.VITE_JOTFORM_API_BASE
 const API_KEY = import.meta.env.VITE_JOTFORM_API_KEY_1
 
+const PAGE_SIZE = 1000
+
+/**
+ * Fetch ALL submissions for a form, paginating with offset until empty.
+ * JotForm caps a single response at ~1000; for safety we loop.
+ */
 async function fetchSubmissions(formId: string): Promise<RawSubmission[]> {
-  const url = `${BASE}/form/${formId}/submissions?apiKey=${API_KEY}&limit=100&orderby=created_at&direction=ASC`
-  const res = await fetch(url)
-  if (!res.ok) throw new Error(`JotForm API error: ${res.status}`)
-  const data = await res.json()
-  return data.content ?? []
+  const all: RawSubmission[] = []
+  let offset = 0
+
+  while (true) {
+    const url = `${BASE}/form/${formId}/submissions?apiKey=${API_KEY}&limit=${PAGE_SIZE}&offset=${offset}&orderby=created_at&direction=ASC`
+    const res = await fetch(url)
+    if (!res.ok) throw new Error(`JotForm API error: ${res.status}`)
+    const data = await res.json()
+    const page: RawSubmission[] = data.content ?? []
+    all.push(...page)
+    if (page.length < PAGE_SIZE) break
+    offset += PAGE_SIZE
+  }
+
+  return all
 }
 
 export async function fetchCheckins(): Promise<Checkin[]> {
