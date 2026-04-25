@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import { Loader } from './Loader'
 
 type SectionState = {
   isLoading: boolean
@@ -45,16 +46,14 @@ export function FormSection({
         </header>
       )}
 
-      {state.isLoading && (
-        <p className="text-gray-500 text-sm">Yükleniyor...</p>
-      )}
       {state.isError && (
         <p className="text-red-600 text-sm">Veri çekilemedi.</p>
       )}
 
-      {!state.isLoading && !state.isError && (
-        <div className="overflow-x-auto rounded-lg border border-gray-200 bg-white shadow-sm">
+      {!state.isError && (
+        <div className="relative overflow-x-auto rounded-lg border border-gray-200 bg-white shadow-sm min-h-[160px]">
           <table className="w-full text-sm">{children}</table>
+          {state.isLoading && <Loader />}
         </div>
       )}
     </section>
