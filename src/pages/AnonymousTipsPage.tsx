@@ -14,9 +14,9 @@ import { formatDate, formatTime } from '@/utils/parseTimestamp'
 import { CoordinateLink } from '@/components/cells/CoordinateLink'
 
 const confidenceColor = {
-  high: 'bg-red-50 text-red-700 border border-red-200',
+  low: 'bg-red-50 text-red-700 border border-red-200',
   medium: 'bg-yellow-50 text-yellow-700 border border-yellow-200',
-  low: 'bg-gray-100 text-gray-600 border border-gray-200',
+  high: 'bg-green-50 text-green-700 border border-green-200',
 } as const
 
 export default function AnonymousTipsPage() {

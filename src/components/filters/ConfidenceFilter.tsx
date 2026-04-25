@@ -1,15 +1,15 @@
 import { useFilters } from '@/filters/useFilters'
 
 const LEVELS = [
-  { value: 'high', label: 'Yüksek', color: 'red' },
+  { value: 'high', label: 'Yüksek', color: 'green' },
   { value: 'medium', label: 'Orta', color: 'yellow' },
-  { value: 'low', label: 'Düşük', color: 'gray' },
+  { value: 'low', label: 'Düşük', color: 'red' },
 ] as const
 
 const ACTIVE_CLASSES: Record<(typeof LEVELS)[number]['color'], string> = {
-  red: 'bg-red-50 border-red-300 text-red-700',
+  green: 'bg-green-50 border-green-300 text-green-700',
   yellow: 'bg-yellow-50 border-yellow-300 text-yellow-700',
-  gray: 'bg-gray-100 border-gray-300 text-gray-700',
+  red: 'bg-red-50 border-red-300 text-red-700',
 }
 
 export function ConfidenceFilter() {
