@@ -14,6 +14,10 @@ const PAGE_META: Record<string, PageMeta> = {
     title: 'Vaka Haritası',
     subtitle: 'Tüm konum verileri tek ekranda',
   },
+  '/celiski': {
+    title: 'Çelişkiler',
+    subtitle: 'Aynı kişinin imkânsız hareketleri',
+  },
   '/checkins': {
     title: 'Giriş Kayıtları',
     subtitle: 'Konum bildirimleri ve zaman damgaları',

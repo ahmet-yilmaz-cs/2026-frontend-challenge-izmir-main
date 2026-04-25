@@ -8,6 +8,7 @@ import PersonalNotesPage from '@/pages/PersonalNotesPage'
 import AnonymousTipsPage from '@/pages/AnonymousTipsPage'
 import PodoTrailPage from '@/pages/PodoTrailPage'
 import MasterMapPage from '@/pages/MasterMapPage'
+import ConflictsPage from '@/pages/ConflictsPage'
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
         <Route element={<AppShell />}>
           <Route path="/iz" element={<PodoTrailPage />} />
           <Route path="/harita" element={<MasterMapPage />} />
+          <Route path="/celiski" element={<ConflictsPage />} />
           <Route path="/checkins" element={<CheckinsPage />} />
           <Route path="/messages" element={<MessagesPage />} />
           <Route path="/sightings" element={<SightingsPage />} />

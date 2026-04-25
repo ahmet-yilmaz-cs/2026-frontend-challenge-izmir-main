@@ -7,6 +7,7 @@ import {
   AlertTriangle,
   Footprints,
   Map,
+  Scale,
   type LucideIcon,
 } from 'lucide-react'
 import { useCheckins } from '@/hooks/useCheckins'
@@ -64,6 +65,7 @@ export function MainNav() {
       items: [
         { to: '/iz', label: "Podo'nun İzi", icon: Footprints, accent: true },
         { to: '/harita', label: 'Vaka Haritası', icon: Map, accent: true },
+        { to: '/celiski', label: 'Çelişkiler', icon: Scale, accent: true },
       ],
     },
     {
