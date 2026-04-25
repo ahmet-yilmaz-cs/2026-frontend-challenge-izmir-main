@@ -8,7 +8,7 @@ import { DateRangeFilter } from '@/components/filters/DateRangeFilter'
 import { SearchFilter } from '@/components/filters/SearchFilter'
 import { useFilters } from '@/filters/useFilters'
 import { applyMessageFilters } from '@/filters/applyFilters'
-import { formatDateTime } from '@/utils/parseTimestamp'
+import { formatDate, formatTime } from '@/utils/parseTimestamp'
 
 export default function MessagesPage() {
   const { data, isLoading, isError } = useMessages()
@@ -38,17 +38,19 @@ export default function MessagesPage() {
               <Th>From</Th>
               <Th>To</Th>
               <Th>Message</Th>
-              <Th>Timestamp</Th>
+              <Th>Tarih</Th>
+              <Th>Saat</Th>
             </tr>
           </thead>
           <tbody>
-            {rows?.length === 0 && <EmptyRow colSpan={4} />}
+            {rows?.length === 0 && <EmptyRow colSpan={5} />}
             {rows?.map((m) => (
               <tr key={m.id}>
                 <Td>{m.from}</Td>
                 <Td>{m.to}</Td>
                 <Td>{m.message}</Td>
-                <Td mono>{formatDateTime(m.timestamp)}</Td>
+                <Td mono>{formatDate(m.timestamp)}</Td>
+                <Td mono>{formatTime(m.timestamp)}</Td>
               </tr>
             ))}
           </tbody>

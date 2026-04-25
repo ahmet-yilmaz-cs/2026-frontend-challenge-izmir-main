@@ -8,7 +8,7 @@ import { DateRangeFilter } from '@/components/filters/DateRangeFilter'
 import { SearchFilter } from '@/components/filters/SearchFilter'
 import { useFilters } from '@/filters/useFilters'
 import { applyPersonalNoteFilters } from '@/filters/applyFilters'
-import { formatDateTime } from '@/utils/parseTimestamp'
+import { formatDate, formatTime } from '@/utils/parseTimestamp'
 
 export default function PersonalNotesPage() {
   const { data, isLoading, isError } = usePersonalNotes()
@@ -37,16 +37,18 @@ export default function PersonalNotesPage() {
             <tr>
               <Th>Full Name</Th>
               <Th>Note</Th>
-              <Th>Timestamp</Th>
+              <Th>Tarih</Th>
+              <Th>Saat</Th>
             </tr>
           </thead>
           <tbody>
-            {rows?.length === 0 && <EmptyRow colSpan={3} />}
+            {rows?.length === 0 && <EmptyRow colSpan={4} />}
             {rows?.map((n) => (
               <tr key={n.id}>
                 <Td>{n.fullName}</Td>
                 <Td>{n.note}</Td>
-                <Td mono>{formatDateTime(n.timestamp)}</Td>
+                <Td mono>{formatDate(n.timestamp)}</Td>
+                <Td mono>{formatTime(n.timestamp)}</Td>
               </tr>
             ))}
           </tbody>

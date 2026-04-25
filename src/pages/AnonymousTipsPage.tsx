@@ -10,7 +10,7 @@ import { SearchFilter } from '@/components/filters/SearchFilter'
 import { ConfidenceFilter } from '@/components/filters/ConfidenceFilter'
 import { useFilters } from '@/filters/useFilters'
 import { applyAnonymousTipFilters } from '@/filters/applyFilters'
-import { formatDateTime } from '@/utils/parseTimestamp'
+import { formatDate, formatTime } from '@/utils/parseTimestamp'
 import { CoordinateLink } from '@/components/cells/CoordinateLink'
 
 const confidenceColor = {
@@ -49,13 +49,14 @@ export default function AnonymousTipsPage() {
               <Th>Suspect Name</Th>
               <Th>Location</Th>
               <Th>Coordinates</Th>
-              <Th>Timestamp</Th>
+              <Th>Tarih</Th>
+              <Th>Saat</Th>
               <Th>Tip</Th>
               <Th>Confidence</Th>
             </tr>
           </thead>
           <tbody>
-            {rows?.length === 0 && <EmptyRow colSpan={6} />}
+            {rows?.length === 0 && <EmptyRow colSpan={7} />}
             {rows?.map((t) => (
               <tr key={t.id}>
                 <Td>{t.suspectName}</Td>
@@ -67,7 +68,8 @@ export default function AnonymousTipsPage() {
                     subtitle={`${t.suspectName} · ${t.timestamp}`}
                   />
                 </Td>
-                <Td mono>{formatDateTime(t.timestamp)}</Td>
+                <Td mono>{formatDate(t.timestamp)}</Td>
+                <Td mono>{formatTime(t.timestamp)}</Td>
                 <Td>{t.tip}</Td>
                 <Td>
                   <span

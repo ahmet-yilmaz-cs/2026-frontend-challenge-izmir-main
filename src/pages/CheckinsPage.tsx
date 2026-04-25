@@ -10,7 +10,7 @@ import { DateRangeFilter } from '@/components/filters/DateRangeFilter'
 import { SearchFilter } from '@/components/filters/SearchFilter'
 import { useFilters } from '@/filters/useFilters'
 import { applyCheckinFilters } from '@/filters/applyFilters'
-import { formatDateTime } from '@/utils/parseTimestamp'
+import { formatDate, formatTime } from '@/utils/parseTimestamp'
 
 export default function CheckinsPage() {
   const { data, isLoading, isError } = useCheckins()
@@ -41,12 +41,13 @@ export default function CheckinsPage() {
               <Th>Full Name</Th>
               <Th>Location</Th>
               <Th>Coordinates</Th>
-              <Th>Timestamp</Th>
+              <Th>Tarih</Th>
+              <Th>Saat</Th>
               <Th>Note</Th>
             </tr>
           </thead>
           <tbody>
-            {rows?.length === 0 && <EmptyRow colSpan={5} />}
+            {rows?.length === 0 && <EmptyRow colSpan={6} />}
             {rows?.map((c) => (
               <tr key={c.id}>
                 <Td>{c.fullName}</Td>
@@ -58,7 +59,8 @@ export default function CheckinsPage() {
                     subtitle={`${c.fullName} · ${c.timestamp}`}
                   />
                 </Td>
-                <Td mono>{formatDateTime(c.timestamp)}</Td>
+                <Td mono>{formatDate(c.timestamp)}</Td>
+                <Td mono>{formatTime(c.timestamp)}</Td>
                 <Td>{c.note}</Td>
               </tr>
             ))}

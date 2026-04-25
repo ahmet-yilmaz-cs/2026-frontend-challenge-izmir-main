@@ -13,6 +13,16 @@ export function formatTime(raw: string): string {
   return date.toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' })
 }
 
+export function formatDate(raw: string): string {
+  const date = parseTimestamp(raw)
+  if (date.getTime() === 0) return raw
+  return date.toLocaleDateString('tr-TR', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+  })
+}
+
 export function formatDateTime(raw: string): string {
   const date = parseTimestamp(raw)
   if (date.getTime() === 0) return raw

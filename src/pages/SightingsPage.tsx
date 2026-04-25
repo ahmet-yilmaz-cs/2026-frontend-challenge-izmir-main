@@ -9,7 +9,7 @@ import { DateRangeFilter } from '@/components/filters/DateRangeFilter'
 import { SearchFilter } from '@/components/filters/SearchFilter'
 import { useFilters } from '@/filters/useFilters'
 import { applySightingFilters } from '@/filters/applyFilters'
-import { formatDateTime } from '@/utils/parseTimestamp'
+import { formatDate, formatTime } from '@/utils/parseTimestamp'
 import { CoordinateLink } from '@/components/cells/CoordinateLink'
 
 export default function SightingsPage() {
@@ -42,12 +42,13 @@ export default function SightingsPage() {
               <Th>Seen With</Th>
               <Th>Location</Th>
               <Th>Coordinates</Th>
-              <Th>Timestamp</Th>
+              <Th>Tarih</Th>
+              <Th>Saat</Th>
               <Th>Note</Th>
             </tr>
           </thead>
           <tbody>
-            {rows?.length === 0 && <EmptyRow colSpan={6} />}
+            {rows?.length === 0 && <EmptyRow colSpan={7} />}
             {rows?.map((s) => (
               <tr key={s.id}>
                 <Td>{s.personName}</Td>
@@ -60,7 +61,8 @@ export default function SightingsPage() {
                     subtitle={`${s.personName} · ${s.timestamp}`}
                   />
                 </Td>
-                <Td mono>{formatDateTime(s.timestamp)}</Td>
+                <Td mono>{formatDate(s.timestamp)}</Td>
+                <Td mono>{formatTime(s.timestamp)}</Td>
                 <Td>{s.note}</Td>
               </tr>
             ))}
