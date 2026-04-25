@@ -38,13 +38,13 @@ export default function SightingsPage() {
         >
           <thead>
             <tr>
-              <Th>Person Name</Th>
-              <Th>Seen With</Th>
-              <Th>Location</Th>
-              <Th>Coordinates</Th>
+              <Th>İsim</Th>
+              <Th>Beraber Görüldüğü</Th>
+              <Th>Konum</Th>
+              <Th>Koordinatlar</Th>
               <Th>Tarih</Th>
               <Th>Saat</Th>
-              <Th>Note</Th>
+              <Th>Not</Th>
             </tr>
           </thead>
           <tbody>

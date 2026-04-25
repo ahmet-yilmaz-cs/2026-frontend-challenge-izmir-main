@@ -35,9 +35,9 @@ export default function MessagesPage() {
         >
           <thead>
             <tr>
-              <Th>From</Th>
-              <Th>To</Th>
-              <Th>Message</Th>
+              <Th>Gönderen</Th>
+              <Th>Alıcı</Th>
+              <Th>Mesaj</Th>
               <Th>Tarih</Th>
               <Th>Saat</Th>
             </tr>

@@ -38,12 +38,12 @@ export default function CheckinsPage() {
         >
           <thead>
             <tr>
-              <Th>Full Name</Th>
-              <Th>Location</Th>
-              <Th>Coordinates</Th>
+              <Th>İsim</Th>
+              <Th>Konum</Th>
+              <Th>Koordinatlar</Th>
               <Th>Tarih</Th>
               <Th>Saat</Th>
-              <Th>Note</Th>
+              <Th>Not</Th>
             </tr>
           </thead>
           <tbody>

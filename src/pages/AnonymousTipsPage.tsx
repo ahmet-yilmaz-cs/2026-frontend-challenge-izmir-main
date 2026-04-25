@@ -19,6 +19,12 @@ const confidenceColor = {
   high: 'bg-green-50 text-green-700 border border-green-200',
 } as const
 
+const confidenceLabel = {
+  low: 'Düşük',
+  medium: 'Orta',
+  high: 'Yüksek',
+} as const
+
 export default function AnonymousTipsPage() {
   const { data, isLoading, isError } = useAnonymousTips()
   const { filters } = useFilters()
@@ -46,13 +52,13 @@ export default function AnonymousTipsPage() {
         >
           <thead>
             <tr>
-              <Th>Suspect Name</Th>
-              <Th>Location</Th>
-              <Th>Coordinates</Th>
+              <Th>Şüpheli</Th>
+              <Th>Konum</Th>
+              <Th>Koordinatlar</Th>
               <Th>Tarih</Th>
               <Th>Saat</Th>
-              <Th>Tip</Th>
-              <Th>Confidence</Th>
+              <Th>İhbar</Th>
+              <Th>Güven</Th>
             </tr>
           </thead>
           <tbody>
@@ -75,7 +81,7 @@ export default function AnonymousTipsPage() {
                   <span
                     className={`text-xs font-semibold px-2 py-0.5 rounded-full ${confidenceColor[t.confidence]}`}
                   >
-                    {t.confidence}
+                    {confidenceLabel[t.confidence]}
                   </span>
                 </Td>
               </tr>

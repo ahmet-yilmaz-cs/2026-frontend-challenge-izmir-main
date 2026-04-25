@@ -7,23 +7,23 @@ type PageMeta = {
 
 const PAGE_META: Record<string, PageMeta> = {
   '/checkins': {
-    title: 'Check-ins',
+    title: 'Giriş Kayıtları',
     subtitle: 'Konum bildirimleri ve zaman damgaları',
   },
   '/messages': {
-    title: 'Messages',
+    title: 'Mesajlar',
     subtitle: 'Kişiler arası yazışmalar',
   },
   '/sightings': {
-    title: 'Sightings',
+    title: 'Görülmeler',
     subtitle: 'Görgü tanıkları ve birlikte görülmeler',
   },
   '/notes': {
-    title: 'Personal Notes',
+    title: 'Kişisel Notlar',
     subtitle: 'Kişisel günlük girişleri',
   },
   '/tips': {
-    title: 'Anonymous Tips',
+    title: 'Anonim İhbarlar',
     subtitle: 'Anonim ihbarlar ve şüpheliler',
   },
 }

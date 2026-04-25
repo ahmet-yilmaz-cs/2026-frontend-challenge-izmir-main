@@ -20,7 +20,7 @@ export default function HomePage() {
         <p className="text-gray-600 leading-relaxed mb-12">
           İzmir sokaklarında 5 farklı kaynaktan toplanmış ipuçları var:
           <br />
-          check-in'ler, mesajlar, görgü tanıkları, kişisel notlar ve anonim ihbarlar.
+          giriş kayıtları, mesajlar, görülmeler, kişisel notlar ve anonim ihbarlar.
           <br />
           Onu bulmak için bu bilgilerin arasındaki bağlantıları çözmen gerekiyor.
         </p>

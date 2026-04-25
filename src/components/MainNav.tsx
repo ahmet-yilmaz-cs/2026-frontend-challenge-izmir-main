@@ -51,11 +51,11 @@ export function MainNav() {
   const search = preserveSearch(location.search)
 
   const items: NavItem[] = [
-    { to: '/checkins', label: 'Check-ins', icon: MapPin, count: checkins?.length },
-    { to: '/messages', label: 'Messages', icon: MessageSquare, count: messages?.length },
-    { to: '/sightings', label: 'Sightings', icon: Eye, count: sightings?.length },
-    { to: '/notes', label: 'Personal Notes', icon: StickyNote, count: notes?.length },
-    { to: '/tips', label: 'Anonymous Tips', icon: AlertTriangle, count: tips?.length },
+    { to: '/checkins', label: 'Giriş Kayıtları', icon: MapPin, count: checkins?.length },
+    { to: '/messages', label: 'Mesajlar', icon: MessageSquare, count: messages?.length },
+    { to: '/sightings', label: 'Görülmeler', icon: Eye, count: sightings?.length },
+    { to: '/notes', label: 'Kişisel Notlar', icon: StickyNote, count: notes?.length },
+    { to: '/tips', label: 'Anonim İhbarlar', icon: AlertTriangle, count: tips?.length },
   ]
 
   return (

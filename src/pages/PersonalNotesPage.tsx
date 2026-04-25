@@ -35,8 +35,8 @@ export default function PersonalNotesPage() {
         >
           <thead>
             <tr>
-              <Th>Full Name</Th>
-              <Th>Note</Th>
+              <Th>İsim</Th>
+              <Th>Not</Th>
               <Th>Tarih</Th>
               <Th>Saat</Th>
             </tr>
